@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Subodh Zadte Photography | Cinematic Gallery</title>
+  <meta name="description" content="Weddings, pre-weddings, portraits, maternity, kids and documentary photography by Subodh Zadte, Chhatrapati Sambhajinagar. Rated 4.9 on Google. Book your date on WhatsApp.">
+  <meta name="theme-color" content="#100B0F">
+  <meta property="og:title" content="Subodh Zadte Photography">
+  <meta property="og:image" content="images/og-image.jpg">
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;500;600;700&family=Rozha+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/gallery.css">
+</head>
+<body>
+  <a class="skip" href="#stories">Skip to the stories</a>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="top">
+    <a class="brand" href="#top" aria-label="Subodh Zadte Photography, back to top"><span class="mark" aria-hidden="true">SZ</span><span>Subodh Zadte</span></a>
+    <nav aria-label="Main">
+      <a href="#stories">Stories</a>
+      <a href="#work">Work</a>
+      <a href="#packages">Packages</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#faq">FAQ</a>
+      <a class="cta" href="#book">Book a date</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <!-- 1. HERO: letterboxed film -->
+    <section class="film" aria-label="Featured photographs">
+      <div class="bar-top" aria-hidden="true"><span></span><span class="tc" id="tc">00:00:00:00</span></div>
+      <div class="screen">
+        <div class="shots" id="shots"></div>
+        <div class="title">
+          <p class="mr" lang="mr">प्रत्येक फ्रेम, एक कथा.</p>
+          <h1>Every frame <em>tells a story</em></h1>
+          <p class="sub">Weddings, portraits, kids and documentary work from Chhatrapati Sambhajinagar, shot like cinema.</p>
+          <div class="actions"><a class="btn" href="#stories">Watch the stories</a><a class="btn ghost" href="#book">Book a date</a></div>
+        </div>
+      </div>
+      <div class="bar-bottom" aria-hidden="true"><span>Now showing: <b id="nowShowing">Pre-wedding</b></span><span id="reelNo">Frame 1 of 5</span></div>
+    </section>
+
+    <!-- 2. TICKER -->
+    <div class="ticker" aria-label="Subodh Zadte Photography in numbers">
+      <div class="ticker-track">
+        <ul>
+          <li><b>4.9 ★</b> on Google</li><li><b>135</b> Google reviews</li><li><b>4.9</b> on Justdial, 141 ratings</li>
+          <li><b>23.8K</b> Facebook followers</li><li><b>5.3K</b> on Instagram</li><li><b>10+</b> years behind the camera</li>
+        </ul>
+        <ul aria-hidden="true">
+          <li><b>4.9 ★</b> on Google</li><li><b>135</b> Google reviews</li><li><b>4.9</b> on Justdial, 141 ratings</li>
+          <li><b>23.8K</b> Facebook followers</li><li><b>5.3K</b> on Instagram</li><li><b>10+</b> years behind the camera</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 3. STORIES: tall reel cards -->
+    <section class="stories" id="stories" aria-labelledby="storiesTitle">
+      <div class="head">
+        <div>
+          <p class="kicker">Watch</p>
+          <h2 id="storiesTitle">Pick a story</h2>
+        </div>
+        <p>Each story plays like a reel. Tap the right side for the next photo, the left to go back, and hold to pause.</p>
+      </div>
+      <div class="story-row" id="storyRow"></div>
+    </section>
+
+    <!-- 4. FEATURED WORK: editorial spreads -->
+    <section class="work" id="work" aria-labelledby="workTitle">
+      <div class="head">
+        <div>
+          <p class="kicker">Featured work</p>
+          <h2 id="workTitle">Three ideas, three shoots</h2>
+        </div>
+        <p>How a simple idea (a sunset, a single lamp, a toy car) becomes a set of photos a family keeps.</p>
+      </div>
+      <div id="spreads"></div>
+    </section>
+
+    <!-- 5. SPOTLIGHT: documentary -->
+    <section class="spot" aria-labelledby="spotTitle">
+      <img class="spot-bg" src="images/g-kushti-1.jpg" alt="Wrestlers grappling in the mud at a kushti match, in black and white" loading="lazy">
+      <div class="spot-copy">
+        <p class="kicker">Beyond weddings</p>
+        <h2 id="spotTitle">Kushti, in black and white</h2>
+        <p>The same eye that follows a varmala follows two wrestlers in the mud. Subodh's documentary work is where his timing shows most.</p>
+        <button class="btn ghost" data-open-story="kushti">Watch the kushti story</button>
+      </div>
+    </section>
+
+    <!-- 6. PACKAGES -->
+    <section class="packages" id="packages" aria-labelledby="pkTitle">
+      <div class="head">
+        <div>
+          <p class="kicker">Packages</p>
+          <h2 id="pkTitle">What you can book</h2>
+        </div>
+        <p>Every package is adjusted to your dates, guest count and venue. Ask on WhatsApp for a quote.</p>
+      </div>
+      <div class="pk-grid" id="pkGrid"></div>
+    </section>
+
+    <!-- 7. PROCESS -->
+    <section class="process" aria-labelledby="processTitle">
+      <div class="head">
+        <div>
+          <p class="kicker">How it works</p>
+          <h2 id="processTitle">From hello to album</h2>
+        </div>
+      </div>
+      <ol class="steps" id="steps"></ol>
+    </section>
+
+    <!-- 8. REVIEWS -->
+    <section class="reviews" id="reviews" aria-labelledby="revTitle">
+      <div class="rev-top">
+        <div>
+          <p class="kicker">Reviews</p>
+          <h2 id="revTitle">What families say</h2>
+        </div>
+        <div class="scores">
+          <a class="score" href="https://www.google.com/search?q=subodh+zadte+photography" target="_blank" rel="noopener"><b>4.9</b><span class="stars" aria-hidden="true">★★★★★</span><span>135 reviews on Google</span></a>
+          <div class="score"><b>4.9</b><span class="stars" aria-hidden="true">★★★★★</span><span>141 ratings on Justdial</span></div>
+        </div>
+      </div>
+      <figure class="feature-quote" aria-live="polite">
+        <blockquote id="fqText"></blockquote>
+        <figcaption id="fqWho"></figcaption>
+      </figure>
+      <div class="rev-filters" role="group" aria-label="Filter reviews">
+        <button class="chip is-on" data-f="all" aria-pressed="true">All</button>
+        <button class="chip" data-f="wedding" aria-pressed="false">Weddings &amp; engagements</button>
+        <button class="chip" data-f="portrait" aria-pressed="false">Portraits, kids &amp; family</button>
+        <button class="chip" data-f="video" aria-pressed="false">Video</button>
+        <button class="chip" data-f="mr" aria-pressed="false">मराठीत</button>
+      </div>
+      <!-- Excerpts from public Google reviews of SUBODH ZADTE PHOTOGRAPHY, quoted word for word. -->
+      <div class="rev-grid" id="revGrid"></div>
+      <div class="rev-more">
+        <button class="btn ghost" id="revMore">Show more reviews</button>
+        <a class="link" href="https://www.google.com/search?q=subodh+zadte+photography" target="_blank" rel="noopener">Read all 135 on Google</a>
+      </div>
+    </section>
+
+    <!-- 9. DIRECTOR + STUDIO -->
+    <section class="director" aria-labelledby="dirTitle">
+      <img src="images/about-subodh.jpg" alt="Portrait of Subodh Zadte" loading="lazy">
+      <div>
+        <p class="kicker">Directed and photographed by</p>
+        <h2 id="dirTitle">Subodh Zadte</h2>
+        <p>Self-taught, with more than ten years behind the camera across Chhatrapati Sambhajinagar. Weddings and pre-weddings, studio portraits, kids, fashion, and the kushti grounds. He has played dhol-tasha since childhood, so he knows a celebration from the inside.</p>
+        <div class="studio">
+          <h3>Visit the new studio</h3>
+          <p>Tirupati Ho. Society, Gut No. 170, Tisgaon, Chhatrapati Sambhajinagar. Opens at 9:00 AM. Come and see printed albums, or book a studio shoot.</p>
+          <a class="link" href="https://www.google.com/maps/search/?api=1&query=SUBODH+ZADTE+PHOTOGRAPHY+Tisgaon" target="_blank" rel="noopener">Get directions</a>
+        </div>
+        <p class="social">
+          <a href="https://www.instagram.com/subodh_zadte_photography/" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://www.facebook.com/subodhzadte143" target="_blank" rel="noopener">Facebook</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- 10. FAQ -->
+    <section class="faq" id="faq" aria-labelledby="faqTitle">
+      <div class="head"><div><p class="kicker">Questions</p><h2 id="faqTitle">Before you book</h2></div></div>
+      <div class="faq-list" id="faqList"></div>
+    </section>
+
+    <!-- 11. BOOK -->
+    <section class="book" id="book" aria-labelledby="bookTitle">
+      <div class="book-in">
+        <h2 id="bookTitle">Book a date</h2>
+        <p>Tell Subodh what you're planning. This opens WhatsApp with your message written; nothing is sent until you press send.</p>
+        <form id="bookForm" novalidate>
+          <label><span>Your name</span><input id="bName" type="text" autocomplete="name" required></label>
+          <label><span>Shoot</span>
+            <select id="bShoot">
+              <option>Wedding</option><option>Pre-wedding</option><option>Engagement</option><option>Portraits</option>
+              <option>Maternity</option><option>Kids &amp; newborn</option><option>Mehendi &amp; haldi</option><option>Fashion</option><option>Something else</option>
+            </select>
+          </label>
+          <label><span>Date</span><input id="bDate" type="date"></label>
+          <label><span>City or venue</span><input id="bVenue" type="text"></label>
+          <label class="full"><span>Anything else?</span><textarea id="bMsg" rows="3"></textarea></label>
+          <p class="err" id="bErr" role="alert" hidden>Please add your name.</p>
+          <button class="btn" type="submit">Open WhatsApp</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div>
+      <p class="foot-brand">Subodh Zadte Photography</p>
+      <p>Tirupati Ho. Society, Gut No. 170, Tisgaon, Chhatrapati Sambhajinagar, Maharashtra</p>
+      <p><a href="tel:+919552773143">+91 95527 73143</a> &nbsp; <a href="mailto:subodh.zadte1990@gmail.com">subodh.zadte1990@gmail.com</a></p>
+    </div>
+    <nav aria-label="More">
+      <a href="https://www.google.com/maps/search/?api=1&query=SUBODH+ZADTE+PHOTOGRAPHY+Tisgaon" target="_blank" rel="noopener">Directions</a>
+      <a href="https://www.instagram.com/subodh_zadte_photography/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.facebook.com/subodhzadte143" target="_blank" rel="noopener">Facebook</a>
+      <a href="https://wa.me/919552773143" target="_blank" rel="noopener">WhatsApp</a>
+    </nav>
+    <p class="copy">&copy; <span id="year">2026</span> SUBODH ZADTE PHOTOGRAPHY. All photos are the property of Subodh Zadte Photography.</p>
+  </footer>
+
+  <a class="wa-float" href="https://wa.me/919552773143" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><path fill="currentColor" d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3zm0 23.7c-2 0-4-.6-5.7-1.6l-.4-.2-3.9 1 1-3.8-.3-.4A10.7 10.7 0 1 1 16 26.7zm5.9-8c-.3-.2-1.9-1-2.2-1-.3-.1-.5-.2-.7.2l-1 1.2c-.2.2-.4.3-.7.1a8.8 8.8 0 0 1-4.4-3.8c-.3-.6.3-.5 1-1.8.1-.2 0-.4 0-.5l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.2 1.4 3.5c.2.2 2.4 3.7 5.8 5.2 2.2.9 3 1 4.1.8.7-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5l-.6-.3z"/></svg>
+  </a>
+
+  <!-- Story viewer -->
+  <dialog class="viewer" id="viewer" aria-label="Story">
+    <div class="v-stage" id="vStage">
+      <img class="v-blur" id="vBlur" alt="" aria-hidden="true">
+      <img class="v-img" id="vImg" alt="">
+      <button class="v-zone v-prev" id="vPrev" aria-label="Previous photo"></button>
+      <button class="v-zone v-next" id="vNext" aria-label="Next photo"></button>
+      <p class="v-caption" id="vCaption"></p>
+    </div>
+    <div class="v-end" id="vEnd" hidden>
+      <p>Like this?</p>
+      <a class="btn" id="vBook" href="#book">Book this shoot</a>
+      <button class="btn ghost" id="vReplay">Watch again</button>
+      <button class="btn ghost" id="vNextStory">Next story</button>
+    </div>
+    <div class="v-chrome">
+      <div class="v-bars" id="vBars"></div>
+      <div class="v-head"><span class="v-dot" id="vDot"></span><b id="vTitle"></b><button class="v-close" id="vClose" aria-label="Close story">&times;</button></div>
+    </div>
+  </dialog>
+
+  <!-- Single photo viewer -->
+  <dialog class="frame-view" id="frameView" aria-label="Photo">
+    <img id="frameImg" alt="">
+    <button class="v-close" id="frameClose" aria-label="Close photo">&times;</button>
+  </dialog>
+
+  <script src="js/gallery.js"></script>
+</body>
+</html>

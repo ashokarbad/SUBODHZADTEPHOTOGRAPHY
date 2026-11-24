@@ -31,10 +31,12 @@
   ];
   var byId = {}; stories.forEach(function (s) { byId[s.id] = s; });
 
-  var heroShots = [
-    { n: "g-sunset-1", label: "Pre-wedding" }, { n: "g-kushti-1", label: "Kushti" }, { n: "g-paithani-1", label: "After dark" },
-    { n: "hero-main", label: "Weddings" }, { n: "g-lights", label: "Pre-wedding" }
-  ];
+  // Photos on the hero wall (small copies live in images/wall/)
+  var wallPhotos = ["fashion-1","g-arches","g-bride-1","g-bride-2","g-bride-bw","g-couple-1","g-couple-2","g-kid-1","g-kid-2","g-kid-3","g-kid-4","g-kid-5",
+    "g-kushti-1","g-kushti-2","g-kushti-3","g-kushti-4","g-kushti-5","g-lights","g-man-2","g-man-3","g-man-4","g-mehendi-1","g-mehendi-2","g-mehendi-3",
+    "g-night-1","g-night-2","g-paithani-1","g-paithani-2","g-paithani-3","g-paithani-4","g-reddress","g-sunset-1","g-sunset-2","g-western","hero-2","hero-3",
+    "hero-main","maternity-1","maternity-2","portrait-1","prewedding-1","prewedding-2","service-fashion","service-haldi","service-wedding",
+    "wedding-1","wedding-2","wedding-3","wedding-4","wedding-5","g-man-1"];
 
   var spreads = [
     { title: "A sunset on the coast", story: "prewedding", photos: ["g-sunset-1", "g-sunset-2", "g-lights"],
@@ -104,23 +106,78 @@
   var onScroll = function () { top.classList.toggle("solid", window.scrollY > window.innerHeight * .6); };
   window.addEventListener("scroll", onScroll, { passive: true }); onScroll();
 
-  /* ---------- Hero ---------- */
-  var shots = document.getElementById("shots");
-  shots.innerHTML = heroShots.map(function (h, i) { return '<img src="' + src(h.n) + '" alt="" ' + (i ? 'loading="lazy"' : 'class="on"') + ">"; }).join("");
-  var shotEls = shots.querySelectorAll("img"), shotI = 0;
-  var nowShowing = document.getElementById("nowShowing"), reelNo = document.getElementById("reelNo");
-  function showShot(i) {
-    shotEls[shotI].classList.remove("on"); shotI = i; shotEls[shotI].classList.add("on");
-    nowShowing.textContent = heroShots[i].label; reelNo.textContent = "Frame " + (i + 1) + " of " + heroShots.length;
+  /* ---------- Hero: a dome of photographs around the viewer ---------- */
+  var roomScene = document.getElementById("roomScene"), roomWall = document.getElementById("roomWall");
+  var tiles = [], yaw = -8, pitch = 0, targetPitch = 0, vel = 0, persp = 800, back = 100, builtW = 0;
+  var dragging = false, dragX = 0, moved = 0, roomOn = true;
+  // spread photos so neighbours differ: a fixed shuffle
+  var order = wallPhotos.map(function (n, i) { return [((i * 37) % 101) / 101, n]; }).sort(function (x, y) { return x[0] - y[0]; }).map(function (x) { return x[1]; });
+  function buildWall() {
+    var W = window.innerWidth, H = window.innerHeight;
+    builtW = W;
+    var tw = Math.round(Math.min(Math.max(W * (W < 700 ? .2 : .105), 92), 190)), th = Math.round(tw * .68), gap = Math.round(tw * .08);
+    var R = tw * (W < 700 ? 4.6 : 5.6);
+    persp = Math.round(R * (W < 700 ? .55 : .62));
+    back = Math.round(R * .14); // camera sits a little behind the centre of the dome
+    roomScene.style.setProperty("--persp", persp + "px");
+    roomWall.style.setProperty("--tw", tw + "px"); roomWall.style.setProperty("--th", th + "px");
+    var rowStep = (th + gap) / R * 180 / Math.PI, html = [], k = 0;
+    tiles = [];
+    for (var e = -rowStep * (W < 700 ? 1.6 : 3.6); e < 62; e += rowStep) {
+      var cols = Math.max(8, Math.floor(2 * Math.PI * R * Math.cos(e * Math.PI / 180) / (tw + gap)));
+      var colStep = 360 / cols, offset = (Math.round(e / rowStep) % 2) * colStep / 2;
+      var lit = Math.max(.45, .98 - Math.abs(e) / 62 * .5);
+      for (var c = 0; c < cols; c++) {
+        var az = c * colStep + offset, name = order[(k * 7 + c) % order.length];
+        tiles.push({ az: az, off: false });
+        html.push('<button class="tile" tabindex="-1" data-photo="' + name + '" style="--lit:' + lit.toFixed(2) +
+          ";transform:rotateY(" + az.toFixed(2) + "deg) rotateX(" + (-e).toFixed(2) + "deg) translateZ(calc(var(--lift, 0px) - " + R + 'px))"><img src="images/wall/' + name + '.jpg" alt="" decoding="async"></button>');
+        k++;
+      }
+    }
+    roomWall.innerHTML = html.join("");
+    var els = roomWall.children;
+    tiles.forEach(function (t, i) { t.el = els[i]; });
+    render(true);
   }
-  if (!reduce) setInterval(function () { showShot((shotI + 1) % shotEls.length); }, 5500);
-  var tc = document.getElementById("tc"), t0 = performance.now();
-  var pad = function (n) { return String(n).padStart(2, "0"); };
-  (function tick() {
-    var ms = performance.now() - t0, s = Math.floor(ms / 1000);
-    tc.textContent = pad(Math.floor(s / 3600)) + ":" + pad(Math.floor(s / 60) % 60) + ":" + pad(s % 60) + ":" + pad(Math.floor(ms / 40) % 25);
-    if (!reduce) requestAnimationFrame(tick);
-  })();
+  function render(force) {
+    roomWall.style.transform = "translateZ(" + (persp - back) + "px) rotateX(" + pitch.toFixed(2) + "deg) rotateY(" + yaw.toFixed(2) + "deg)";
+    for (var i = 0; i < tiles.length; i++) {
+      var t = tiles[i], rel = ((t.az + yaw) % 360 + 540) % 360 - 180, off = Math.abs(rel) > 80;
+      if (off !== t.off || force) { t.off = off; t.el.classList.toggle("off", off); }
+    }
+  }
+  function loop() {
+    if (roomOn) {
+      if (!dragging) { vel *= .94; yaw += vel + (reduce ? 0 : .025); }
+      pitch += (targetPitch - pitch) * .06;
+      render(false);
+    }
+    requestAnimationFrame(loop);
+  }
+  roomScene.addEventListener("pointerdown", function (e) { dragging = true; dragX = e.clientX; moved = 0; vel = 0; roomScene.classList.add("drag"); });
+  window.addEventListener("pointermove", function (e) {
+    if (dragging) { var dx = e.clientX - dragX; dragX = e.clientX; moved += Math.abs(dx); yaw += dx * .12; vel = dx * .12; }
+    if (!reduce && e.pointerType === "mouse") targetPitch = (e.clientY / window.innerHeight - .5) * -5;
+  });
+  window.addEventListener("pointerup", function () { dragging = false; roomScene.classList.remove("drag"); });
+  // a drag should not open a photo
+  roomScene.addEventListener("click", function (e) { if (moved > 6) { e.stopPropagation(); e.preventDefault(); } moved = 0; }, true);
+  var roomSeen = new IntersectionObserver(function (es) { roomOn = es[0].isIntersecting; });
+  roomSeen.observe(document.getElementById("room"));
+  var resizeTimer = null;
+  window.addEventListener("resize", function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function () { if (Math.abs(window.innerWidth - builtW) > 60) buildWall(); }, 250);
+  });
+  buildWall(); requestAnimationFrame(loop);
+
+  // headline lines rotate: 01 / 03, 02 / 03, 03 / 03
+  var lines = document.querySelectorAll(".room-line"), roomNo = document.getElementById("roomNo"), lineI = 0;
+  if (!reduce) setInterval(function () {
+    lines[lineI].classList.remove("on"); lineI = (lineI + 1) % lines.length; lines[lineI].classList.add("on");
+    roomNo.textContent = "0" + (lineI + 1);
+  }, 6000);
 
   /* ---------- Stories: tall reel cards ---------- */
   document.getElementById("storyRow").innerHTML = stories.map(function (s) {
@@ -208,15 +265,26 @@
     }, { passive: true });
   }
 
-  /* ---------- Single photo viewer ---------- */
+  /* ---------- Single photo viewer (photos from the wall close by themselves after 3 seconds) ---------- */
   var frameView = document.getElementById("frameView"), frameImg = document.getElementById("frameImg");
+  var frameBar = document.createElement("span"); frameBar.className = "frame-timer"; frameBar.setAttribute("aria-hidden", "true");
+  frameView.appendChild(frameBar);
+  var frameTimer = null, PEEK = 3000;
+  function openPhoto(name, peek) {
+    clearTimeout(frameTimer);
+    frameImg.src = src(name);
+    frameView.classList.toggle("peek", !!peek);
+    frameBar.style.animation = "none"; void frameBar.offsetWidth; frameBar.style.animation = "";
+    if (!frameView.open && typeof frameView.showModal === "function") frameView.showModal();
+    if (peek) frameTimer = setTimeout(function () { frameView.close(); }, PEEK);
+  }
   document.addEventListener("click", function (e) {
     var b = e.target.closest("[data-photo]"); if (!b) return;
-    frameImg.src = src(b.getAttribute("data-photo"));
-    if (typeof frameView.showModal === "function") frameView.showModal();
+    openPhoto(b.getAttribute("data-photo"), b.classList.contains("tile"));
   });
   document.getElementById("frameClose").addEventListener("click", function () { frameView.close(); });
   frameView.addEventListener("click", function (e) { if (e.target === frameView || e.target === frameImg) frameView.close(); });
+  frameView.addEventListener("close", function () { clearTimeout(frameTimer); frameView.classList.remove("peek"); });
 
   /* ---------- Story viewer ---------- */
   var viewer = document.getElementById("viewer"), vBars = document.getElementById("vBars"), vImg = document.getElementById("vImg"), vBlur = document.getElementById("vBlur");

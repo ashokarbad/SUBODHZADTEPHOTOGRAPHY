@@ -31,19 +31,42 @@
   </header>
 
   <main id="top">
-    <!-- 1. HERO: letterboxed film -->
-    <section class="film" aria-label="Featured photographs">
-      <div class="bar-top" aria-hidden="true"><span></span><span class="tc" id="tc">00:00:00:00</span></div>
-      <div class="screen">
-        <div class="shots" id="shots"></div>
-        <div class="title">
-          <p class="mr" lang="mr">प्रत्येक फ्रेम, एक कथा.</p>
-          <h1>Every frame <em>tells a story</em></h1>
-          <p class="sub">Weddings, portraits, kids and documentary work from Chhatrapati Sambhajinagar, shot like cinema.</p>
-          <div class="actions"><a class="btn" href="#stories">Watch the stories</a><a class="btn ghost" href="#book">Book a date</a></div>
-        </div>
+    <!-- 1. HERO: a room lined with photographs -->
+    <section class="room" id="room" aria-label="A wall of Subodh Zadte's photographs">
+      <div class="room-scene" id="roomScene">
+        <div class="room-wall" id="roomWall"></div>
       </div>
-      <div class="bar-bottom" aria-hidden="true"><span>Now showing: <b id="nowShowing">Pre-wedding</b></span><span id="reelNo">Frame 1 of 5</span></div>
+      <div class="room-floor" aria-hidden="true"></div>
+      <svg class="room-figure" viewBox="0 0 60 150" aria-hidden="true">
+        <ellipse cx="30" cy="146" rx="24" ry="4" fill="#000" opacity=".55"/>
+        <circle cx="31" cy="14" r="9" fill="#120c10"/>
+        <path d="M18 30 Q31 22 44 30 L47 78 Q46 84 42 84 L41 140 L34 140 L32 92 L29 92 L27 140 L20 140 L19 84 Q15 83 15 78 Z" fill="#120c10"/>
+        <path d="M44 34 L52 46 L44 52 Z" fill="#120c10"/>
+        <rect x="40" y="40" width="14" height="10" rx="2" fill="#1d151b"/>
+        <circle cx="47" cy="45" r="3.4" fill="#3a2c35"/>
+      </svg>
+      <div class="room-shade" aria-hidden="true"></div>
+
+      <div class="room-copy">
+        <p class="room-count"><span class="dash" aria-hidden="true"></span><span id="roomNo">01</span> / 03</p>
+        <div class="room-lines" aria-live="polite">
+          <div class="room-line on">
+            <h1>Every frame tells a story.</h1>
+            <p>Ten years of weddings, portraits, kids and kushti, on one wall.</p>
+          </div>
+          <div class="room-line">
+            <p class="h">Lift a frame off the wall.</p>
+            <p>Tap any photo to see it full size. Drag to turn the room.</p>
+          </div>
+          <div class="room-line">
+            <p class="h">Your story goes up next.</p>
+            <p>Check your date with Subodh on WhatsApp.</p>
+          </div>
+        </div>
+        <div class="actions"><a class="btn" href="#stories">Watch the stories</a><a class="btn ghost" href="#book">Book a date</a></div>
+      </div>
+      <p class="room-mr" lang="mr">प्रत्येक फ्रेम, एक कथा.</p>
+      <p class="room-hint" aria-hidden="true">Drag to look around</p>
     </section>
 
     <!-- 2. TICKER -->
